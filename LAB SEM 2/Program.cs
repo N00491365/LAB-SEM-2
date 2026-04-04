@@ -22,7 +22,7 @@ namespace CajeroAutomatico
             
             if (monto > saldo)
             {
-                Console.WriteLine("Saldo insuficiente");
+                Console.WriteLine("Saldo insuficiente haciendo prueba");
             }
             else
             {
