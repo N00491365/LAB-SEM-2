@@ -11,6 +11,7 @@ namespace CajeroAutomatico
         string entrada;
         do {
             Console.WriteLine("Bienvenido al cajero automático");
+            Console.WriteLine("Seleccione una opción para continuar");
             Console.WriteLine("1. Retirar dinero");
             Console.WriteLine("0. Salir");
             entrada = Console.ReadLine();
@@ -24,14 +25,19 @@ namespace CajeroAutomatico
             do {
                
                 Console.WriteLine("Ingrese el monto a retirar:");
-                entrada = Console.ReadLine();
+                Console.WriteLine("Saldo disponible: " + saldo);
+                    entrada = Console.ReadLine();
                 esnumero = int.TryParse(entrada, out monto);
-                if (!esnumero)
-                    Console.WriteLine("Entrada invalida");
-                
-            } while (!esnumero);
+                if (!esnumero) {
+                   Console.WriteLine("Entrada invalida");
+                   
+                }else if (monto <= 0) {
+                        Console.WriteLine("Ingrese un monto mayor a 0");
+                    esnumero = false;
+                    }
+                } while (!esnumero);
             if (monto > saldo) {
-                Console.WriteLine("Saldo insuficiente, disponible: "+saldo);
+                Console.WriteLine("Saldo insuficiente, saldo disponible: "+saldo);
             }else{
                 if (monto % 10 != 0) {
                     Console.WriteLine("El cajero no cuenta con monedas. Ingrese una cantidad distruible en billetes");
@@ -47,13 +53,20 @@ namespace CajeroAutomatico
                     residuo = residuo % 20;
                     diez = residuo / 10;
                     residuo = residuo % 10;
-                    Console.WriteLine("Billetes de $200: " + dosciento);
-                    Console.WriteLine("Billetes de $100: " + ciente);
-                    Console.WriteLine("Billetes de $50: " + cincueta);
-                    Console.WriteLine("Billetes de $20: " + veinte);
-                    Console.WriteLine("Billetes de $10: " + diez);
+                    Console.WriteLine("Billetes entregados");
+                        if (dosciento > 0)
+                            Console.WriteLine("Billetes de $200: " + dosciento);
+                        if (ciente > 0)
+                            Console.WriteLine("Billetes de $100: " + ciente);
+                        if (cincueta > 0)
+                            Console.WriteLine("Billetes de $50: " + cincueta);
+                        if (veinte > 0)
+                            Console.WriteLine("Billetes de $20: " + veinte);
+                        if (diez > 0)
+                            Console.WriteLine("Billetes de $10: " + diez);
                     saldo -= monto;
-                }
+                    Console.WriteLine("Saldo restante: " + saldo);
+                    }
             }
             do{
                 Console.WriteLine("¿Quieres repetir la Operación?");
